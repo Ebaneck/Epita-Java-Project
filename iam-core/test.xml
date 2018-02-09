@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<identities> <!-- root or document Element -->
+	<identity> <!-- element (child of root) -->
+		<property name="displayName">Thomas</property>
+		<property name="email">tbr@tbr.com</property>
+		<property name="uid">1234</property>
+	</identity>
+	<identity>
+		<property name="displayName">Clément</property>
+		<property name="email">cserr@cserr.com</property>
+		<property name="uid">123456</property>
+	</identity>
+	<identity>
+		<property name="displayName">Clément</property>
+		<property name="email">cserr@cserr.com</property>
+		<property name="uid">123456</property>
+	</identity>
+	<identity>
+		<property name="displayName">Clément</property>
+		<property name="email">cserr@cserr.com</property>
+		<property name="uid">123456</property>
+	</identity>
+	<identity>
+		<property name="displayName">Clément</property>
+		<property name="email">cserr@cserr.com</property>
+		<property name="uid">123456</property>
+	</identity>
+<identity>
+<property name="displayName">Clément</property>
+<property name="email">cserr@cserr.com</property>
+<property name="uid">123456</property>
+</identity>
+<identity>
+<property name="displayName">Clément</property>
+<property name="email">cserr@cserr.com</property>
+<property name="uid">123456</property>
+</identity>
+<identity>
+<property name="displayName">Clément</property>
+<property name="email">cserr@cserr.com</property>
+<property name="uid">123456</property>
+</identity>
+<identity>
+<property name="displayName">Clément</property>
+<property name="email">cserr@cserr.com</property>
+<property name="uid">123456</property>
+</identity>
+<identity>
+<property name="displayName">Clément</property>
+<property name="email">cserr@cserr.com</property>
+<property name="uid">123456</property>
+</identity>
+<identity>
+<property name="displayName">Clément</property>
+<property name="email">cserr@cserr.com</property>
+<property name="uid">123456</property>
+</identity>
+<identity>
+<property name="displayName">Clément</property>
+<property name="email">cserr@cserr.com</property>
+<property name="uid">123456</property>
+</identity>
+</identities>
+
