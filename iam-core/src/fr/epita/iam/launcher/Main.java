@@ -103,7 +103,7 @@ public class Main {
 			} catch (Exception e) {
 				
 				LOGGER.info("Logging an INFO-level message during program execution");
-				LOGGER.info("Stack traces are important here");
+				LOGGER.info("Problems adding identity, please try again");
 				// TODO: handle exception
 			}
 

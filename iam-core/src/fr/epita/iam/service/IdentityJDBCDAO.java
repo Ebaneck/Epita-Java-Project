@@ -111,7 +111,7 @@ public class IdentityJDBCDAO implements IdentityDAO {
 
 		final String connectionString = Configuration.getInstance().getProperty("db.host");
 		final String userName = "root";
-		final String password = "root";
+		final String password = "password";
 
 		Class.forName("org.apache.derby.jdbc.ClientDriver");
 
