@@ -10,7 +10,9 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import fr.epita.iam.service.IdentityJDBCDAO;
+import fr.epita.iam.service.UpdateIdentity;
 import fr.epita.iam.service.CreateIdentity;
+import fr.epita.iam.service.DeleteIdentity;
 import fr.epita.iam.datamodel.Identity;
 import fr.epita.iam.service.Configuration;
 
@@ -72,14 +74,17 @@ public class Main {
 						break;
 					case "2":
 						//modify
+						
+						UpdateIdentity.update(scanner);
 
 						break;
 					case "3":
 						//delete
+						DeleteIdentity.deletion(scanner);
 
 						break;
 					case "4":
-						System.out.println("Do You really want to quit : yes/no");
+						System.out.println("Do You really want to quit : y/n");
 						confirm = scanner.nextLine();
 						if (!confirm.equalsIgnoreCase("yes")) {
 							break;
@@ -103,7 +108,8 @@ public class Main {
 			} catch (Exception e) {
 				
 				LOGGER.info("Logging an INFO-level message during program execution");
-				LOGGER.info("Problems adding identity, please try again");
+				LOGGER.info("An issue has occured, please restart the application");
+				LOGGER.info("If this persist, send us a bug report");
 				// TODO: handle exception
 			}
 

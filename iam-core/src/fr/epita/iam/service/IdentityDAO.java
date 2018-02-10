@@ -31,8 +31,10 @@ public interface IdentityDAO {
 
 	public void update(Identity identity);
 
-	public void delete(Identity identity);
+	public void delete(Identity identity) throws IdentityCreationException;
 
 	public List<Identity> search(Identity criteria);
+	
+	
 
 }
