@@ -26,7 +26,7 @@ public class DeleteIdentity {
 	public static void deletion(Scanner scanner) throws IdentityCreationException{
 		System.out.println("Deleting an Identity");
 		IdentityJDBCDAO identityJDBCDAO = new IdentityJDBCDAO();
-		List<Identity> identities = identityJDBCDAO.search(null);
+		List<Identity> identities = identityJDBCDAO.search();
 	
 		
 		System.out.println("Select a UID");
@@ -38,7 +38,7 @@ public class DeleteIdentity {
 			System.out.println("You did not enter a valid UID... try again!!");
 			return;
 		}
-		Identity foundIdentity = identityJDBCDAO.find(identity_id);
+		Identity foundIdentity = identityJDBCDAO.search(identity_id);
 		if (foundIdentity == null){
 			System.out.println("Sorry Identity: "+identity_id +"" + "not found");
 		}

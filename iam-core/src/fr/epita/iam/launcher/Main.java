@@ -75,7 +75,7 @@ public class Main {
 					case "2":
 						//modify
 						
-						UpdateIdentity.update(scanner);
+						//UpdateIdentity.update(scanner);
 
 						break;
 					case "3":

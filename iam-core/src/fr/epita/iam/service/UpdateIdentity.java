@@ -18,11 +18,16 @@ import fr.epita.iam.exceptions.IdentityCreationException;
  */
 public class UpdateIdentity {
 	
+	
+	
 	/**
 	 * This method can user input and update an existing identity
 	 * @param scanner: Get user inputs
 	 * @throws IdentityCreationException 
 	 */
+	
+	
+	/**
 	public static void update(Scanner scanner) throws IdentityCreationException{
 		System.out.println("Identity Update");
 		IdentityJDBCDAO identityJDBCDAO = new IdentityJDBCDAO();
@@ -83,4 +88,6 @@ public class UpdateIdentity {
 		System.out.println("update completed successfully");
 		
 	}
+	
+	**/
 }

@@ -73,7 +73,7 @@ public class IdentityJDBCDAO implements IdentityDAO {
 	}
 
 	@Override
-	public List<Identity> search(Identity criteria) {
+	public List<Identity> search() {
 		final List<Identity> identities = new ArrayList<>();
 		// TODO reduce the number of lines to avoid repetition
 		// the pattern is always the same, improve with your own ideas.
@@ -83,9 +83,9 @@ public class IdentityJDBCDAO implements IdentityDAO {
 			connection = getConnection();
 			final PreparedStatement preparedStatement = connection
 					.prepareStatement("select UID, DISPLAY_NAME, EMAIL FROM IDENTITIES WHERE DISPLAY_NAME = ? OR EMAIL = ? OR UID = ? ");
-			preparedStatement.setString(1, criteria.getUid());
-			preparedStatement.setString(3, criteria.getDisplayName());
-			preparedStatement.setString(2, criteria.getEmail());
+			//preparedStatement.setString(1, criteria.getUid());
+			//preparedStatement.setString(3, criteria.getDisplayName());
+			//preparedStatement.setString(2, criteria.getEmail());
 
 			final ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
@@ -128,46 +128,28 @@ public class IdentityJDBCDAO implements IdentityDAO {
 	 */
 	@Override
 	public void update(Identity identity) {
+		
 		Connection connection = null;
-		try {
-			String sql = "update IDENTITIES  set EMAIL=?, "
-					+ "DISPLAY_NAME=?, "
-					+ "UID=?, "
-					+" where IDENTITY_ID=?";
-			
-			
-			PreparedStatement statement = connection.prepareStatement(sql);
-			statement.setString(3, identity.getEmail());
-			statement.setString(2, identity.getDisplayName());
-			
-			statement.setString(1, identity.getUid());
-			statement.executeUpdate();
-			statement.close();
-			connection.close();
-		} catch (SQLException e) {
-			LOGGER.error("error in create method :" + e.getMessage());
-			final IdentityCreationException businessException = new IdentityCreationException(identity, e);
+		        try {
+		        	try {
+						connection = getConnection();
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		            PreparedStatement preparedStatement = connection
+		                    .prepareStatement("delete from IDENTITIES where UIDs=?");
+		            // Parameters start with 1
+		            preparedStatement.setString(1, identity.getUid());
+		            preparedStatement.executeUpdate();
 
-			try {
-				throw businessException;
-			} catch (IdentityCreationException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		} finally {
-			try {
-				if (connection != null) {
-					connection.close();
-				}
-			} catch (final SQLException e) {
-				System.out.println(e.getMessage());
-				e.printStackTrace();
-			}
-		}
-		 
+		        } catch (SQLException e) {
+		            e.printStackTrace();
+		        }
+		    }
 		
 
-	}
+	
 
 	
 	
@@ -183,32 +165,58 @@ public class IdentityJDBCDAO implements IdentityDAO {
 	public void delete(Identity identity) throws IdentityCreationException {
 		
 		Connection connection = null;
-		try {
-			
-			String sql = "delete from IDENTITIES "
-					+" where UID=?";
-			PreparedStatement statement = connection.prepareStatement(sql);
-			statement.setString(1, identity.getUid());
-			statement.executeUpdate();
-			statement.close();
-			
-		} catch (SQLException e) {
-			LOGGER.error("error in create method :" + e.getMessage());
-			final IdentityCreationException businessException = new IdentityCreationException(identity, e);
-
-			throw businessException;
-		} finally {
-			try {
-				if (connection != null) {
-					connection.close();
-				}
-			} catch (final SQLException e) {
-				System.out.println(e.getMessage());
+        try {
+        	try {
+				connection = getConnection();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("delete from IDENTITIES where UID=?");
+            // Parameters start with 1
+            preparedStatement.setString(1, identity.getUid());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+	}
+
+	public Identity search(String identity_id) {
+		Identity identity = new Identity();
+		Connection connection = null;
+		 try {
+			 connection = getConnection();
+	            PreparedStatement preparedStatement = connection.
+	                    prepareStatement("select * from IDENTITIES where UID=?");
+	            preparedStatement.setString(1, identity_id);
+	            ResultSet rs = preparedStatement.executeQuery();
+
+	            if (rs.next()) {
+	                identity.setUid(rs.getString("UID"));
+	                identity.setDisplayName(rs.getString("DISPLAY_NAME"));
+	                identity.setEmail(rs.getString("EMAIL"));
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+	        return identity;
+	    }
+		// TODO Auto-generated method stub
+
+	public List<Identity> search(Identity criteria) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
+	
+	
+	/**
 	
 	public Identity find(Object id) throws IdentityCreationException {
 		Identity identity = null;
@@ -236,4 +244,7 @@ public class IdentityJDBCDAO implements IdentityDAO {
 	}
 		return identity;
 	}
+	
+	**/
+
 }
