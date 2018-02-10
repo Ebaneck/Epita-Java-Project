@@ -1,6 +1,4 @@
-/**
- * Ce fichier est la propriété de Thomas BROUSSARD Code application : Composant :
- */
+
 package fr.epita.iam.service;
 
 import java.sql.Connection;
@@ -9,9 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 
 import fr.epita.iam.datamodel.Identity;
 
@@ -75,6 +73,7 @@ public class IdentityJDBCDAO implements IdentityDAO {
 	@Override
 	public List<Identity> search() {
 		final List<Identity> identities = new ArrayList<>();
+		
 		// TODO reduce the number of lines to avoid repetition
 		// the pattern is always the same, improve with your own ideas.
 		// check lambda expressions
@@ -82,7 +81,8 @@ public class IdentityJDBCDAO implements IdentityDAO {
 		try {
 			connection = getConnection();
 			final PreparedStatement preparedStatement = connection
-					.prepareStatement("select UID, DISPLAY_NAME, EMAIL FROM IDENTITIES WHERE DISPLAY_NAME = ? OR EMAIL = ? OR UID = ? ");
+					.prepareStatement("select UID, DISPLAY_NAME, EMAIL FROM IDENTITIES ");
+			//.prepareStatement("select * from IDENTITIES");
 			//preparedStatement.setString(1, criteria.getUid());
 			//preparedStatement.setString(3, criteria.getDisplayName());
 			//preparedStatement.setString(2, criteria.getEmail());
@@ -183,14 +183,15 @@ public class IdentityJDBCDAO implements IdentityDAO {
         }
 	}
 
-	public Identity search(String identity_id) {
+	public Identity locate(String identity_id) {
 		Identity identity = new Identity();
 		Connection connection = null;
 		 try {
 			 connection = getConnection();
 	            PreparedStatement preparedStatement = connection.
-	                    prepareStatement("select * from IDENTITIES where UID=?");
+	                    prepareStatement("select * from IDENTITIES where UID = ?");
 	            preparedStatement.setString(1, identity_id);
+	            
 	            ResultSet rs = preparedStatement.executeQuery();
 
 	            if (rs.next()) {
@@ -214,37 +215,5 @@ public class IdentityJDBCDAO implements IdentityDAO {
 		return null;
 	}
 	
-	
-	
-	/**
-	
-	public Identity find(Object id) throws IdentityCreationException {
-		Identity identity = null;
-		Connection connection = null;
-		try {
-			String sql = "select * from IDENTITIES where UID = ?";
-			PreparedStatement statement = connection.prepareStatement(sql);
-			statement.setInt(1, Integer.parseInt(id.toString()));
-			
-			ResultSet result = statement.executeQuery();
-			if (result.next()){
-				String uid = result.getString("identity_id");
-				String displayName = result.getString("display_name");
-				String email = result.getString("email");
-				identity = new Identity(uid, displayName, email);
-			}
-			
-		} catch (SQLException e) {
-			LOGGER.error("error in create method :" + e.getMessage());
-			final IdentityCreationException businessException = new IdentityCreationException(identity, e);
-
-		 
-		
-		
-	}
-		return identity;
-	}
-	
-	**/
 
 }

@@ -77,7 +77,7 @@ public class TestXml {
 		}
 
 		// then
-		final List<Identity> identities = dao.search(new Identity("Clément", null, null));
+		final List<Identity> identities = dao.search();
 		if (identities.isEmpty()) {
 			System.out.println("failure");
 		} else {

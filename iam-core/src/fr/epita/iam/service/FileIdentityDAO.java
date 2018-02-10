@@ -74,7 +74,6 @@ public class FileIdentityDAO implements IdentityDAO {
 		printWriter.flush();
 	}
 
-	@Override
 	public List<Identity> search(Identity criteria){
 		final List<Identity> results = new ArrayList<>();
 		while (scanner.hasNext()) {
@@ -143,6 +142,14 @@ public class FileIdentityDAO implements IdentityDAO {
 	@Override
 	public void delete(Identity identity) {
 
+	}
+
+
+
+	@Override
+	public List<Identity> search() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

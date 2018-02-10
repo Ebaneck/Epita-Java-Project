@@ -78,7 +78,7 @@ public class TestFileOperations {
 		// Then : we expect the following result to verify the test.
 		final Identity criteria = new Identity();
 		criteria.setDisplayName("Thom");
-		final List<Identity> identities = dao.search(criteria);
+		final List<Identity> identities = dao.search();
 		if (identities.get(0).equals(id1)) {
 			System.out.println("success");
 		} else {

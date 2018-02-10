@@ -199,7 +199,6 @@ public class IdentityXMLDAO implements IdentityDAO {
 	 * (non-Javadoc)
 	 * @see fr.epita.iam.service.IdentityDAO#search(fr.epita.iam.datamodel.Identity)
 	 */
-	@Override
 	public List<Identity> search(Identity criteria) {
 		final List<Identity> results = new ArrayList<>();
 		final String finalXpathString = XPATH_SEARCH_QUERY.replaceAll(XPATH_NAME_WILDCARD, criteria.getDisplayName());
@@ -267,6 +266,12 @@ public class IdentityXMLDAO implements IdentityDAO {
 			return "";
 		}
 		return result;
+	}
+
+	@Override
+	public List<Identity> search() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/*

@@ -28,29 +28,28 @@ public class DeleteIdentity {
 		IdentityJDBCDAO identityJDBCDAO = new IdentityJDBCDAO();
 		List<Identity> identities = identityJDBCDAO.search();
 	
-		
-		System.out.println("Select a UID");
+		System.out.println("Select an Identity from the list below");
 		for(Identity i : identities){
 			System.out.println("ID : "+i.getUid()+ " \n"+i);
 		}
 		String identity_id = scanner.nextLine();
 		if (identity_id.isEmpty()) {
-			System.out.println("You did not enter a valid UID... try again!!");
+			System.out.println("Did not understand you answer ");
 			return;
 		}
-		Identity foundIdentity = identityJDBCDAO.search(identity_id);
+		Identity foundIdentity = identityJDBCDAO.locate(identity_id);
 		if (foundIdentity == null){
-			System.out.println("Sorry Identity: "+identity_id +"" + "not found");
+			System.out.println("Did not find identity: "+identity_id);
 		}
 		else{
 			System.out.println("Do you really want to "
-					+ "delete identity: " + identity_id+ " y/n");
+					+ "delete identity: " + identity_id+ " " + "Reply with: y/n");
 			String answer = scanner.nextLine();
 			if (answer.equalsIgnoreCase("y")){
 				//persist the identity somewhere
 				System.out.println("This is the identity you want to delete: \n"+foundIdentity);
 				identityJDBCDAO.delete(foundIdentity);
-				System.out.println("Goodbye UID");
+				System.out.println("Identity is Gone for good");
 			}
 			else{
 				System.out.println("Cancel button was pressed");
