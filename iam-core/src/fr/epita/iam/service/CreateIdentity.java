@@ -30,12 +30,12 @@ public class CreateIdentity {
 	 * @param scanner: Used to collect user input
 	 */
 	public static void CreateIdentity(Scanner create){
-		System.out.println("Welcom to Identity Creation");
-		System.out.println("Enter the userID");
+		System.out.println("Identity Creation takes place here:");
+		System.out.println("Enter a userID");
 		String uid = create.nextLine();
-		System.out.println("Enter display name");
+		System.out.println("Enter a display name");
 		String displayName = create.nextLine();
-		System.out.println("Enter email address");
+		System.out.println("Enter an email address");
 		String email = create.nextLine();
 		
 		

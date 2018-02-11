@@ -56,15 +56,23 @@ public class Main {
 		    try {
 				if (username.equals(Username) && password.equals(Password)) {
 
-					System.out.println("Access Granted! Welcome!");
+					System.out.println("Access Granted! Welcome To!");
 
 					Scanner scanner = new Scanner(System.in);
 					//prompt the user to select an option  which can be create, update, delete, modify or exit
-					System.out.println("Please select an action: ");
-					System.out.println("1, Create an identity");
-					System.out.println("2, Modify an identity");
-					System.out.println("3, Delete an identity");
-					System.out.println("4, Exit the application");
+					
+					
+					// Display Identity manager menu in a nice way
+			        System.out.println("*****************************************");
+			        System.out.println("|   IDENTITY MANAGER APPLICATION          |");
+			        System.out.println("*****************************************");
+			        System.out.println("| Options:                              |");
+			        System.out.println("|        1. Create Identity     |");
+			        System.out.println("|        2. Update Identity     |");
+			        System.out.println("|        3. Delete Identity     |");
+			        //System.out.println("|        4. Delete Database Records     |");
+			        System.out.println("|        4. Exit                |");
+			        System.out.println("*****************************************");
 					String choice = scanner.nextLine();
 
 					switch (choice) {
@@ -86,12 +94,10 @@ public class Main {
 						DeleteIdentity.deletion(scanner);
 						break;
 					case "4":
-						System.out.println("Do You really want to quit : y/n");
-						confirm = scanner.nextLine();
-						if (!confirm.equalsIgnoreCase("yes")) {
-							System.exit(0);
-							break;
-						}
+						System.out.println("Goodbye  " + Username);
+						 System.exit(0);
+			                break;
+						
 
 						//Quit
 
