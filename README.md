@@ -11,6 +11,8 @@ The Identity Management software
 
 Source material : http://thomas-broussard.fr/work/java/courses/project/fundamental.xhtml
 
+Project Documentation link : https://docs.google.com/document/d/1q568PkmbPUT8zhzW_Q6aVXpmUVdgVG7sG4LY_Qgr0ac/edit?usp=sharing
+
 Teacher: Thomas Broussard
 
 
