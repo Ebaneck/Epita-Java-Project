@@ -95,8 +95,8 @@ public class Main {
 						break;
 					case "4":
 						System.out.println("Goodbye  " + Username);
-						 System.exit(0);
-			                break;
+						 System.exit(0); 
+			              break;
 						
 
 						//Quit

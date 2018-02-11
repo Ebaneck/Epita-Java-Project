@@ -50,7 +50,7 @@ public class UpdateIdentity {
 					System.out.println("1, UID"); 
 					System.out.println("2, DisplayName"); 
 					System.out.println("3, EMAIL");
-					System.out.println("4, Quit");
+					System.out.println("4, Save and Quit");
 					String options = scanner.nextLine();
 					switch(options.toLowerCase()){
 						case "1":
