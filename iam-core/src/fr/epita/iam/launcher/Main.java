@@ -70,11 +70,13 @@ public class Main {
 					switch (choice) {
 					case "1":
 						//create
+						/**method to invoke the creation of a new identity**/
 						CreateIdentity.CreateIdentity(scanner);
 
 						break;
 					case "2":
 						//modify
+						/**Update identity**/
 
 						UpdateIdentity.update(scanner);
 

@@ -29,6 +29,9 @@ public class DeleteIdentity {
 		List<Identity> identities = identityJDBCDAO.search();
 	
 		System.out.println("Select an Identity from the list below");
+		
+		/**To retrieve values, you will have to use "for each" loop
+         * to iterate through list**/
 		for(Identity i : identities){
 			System.out.println("Unique ID : "+i.getId()+ " \n"+i);
 		}

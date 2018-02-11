@@ -43,6 +43,7 @@ public class IdentityJDBCDAO implements IdentityDAO {
 
 	private static final Logger LOGGER = new Logger(IdentityJDBCDAO.class);
 
+	/**Inserts new record in Identity table as you pass new identity instance**/
 	@Override
 	public void create(Identity identity) throws IdentityCreationException {
 		Connection connection = null;
@@ -72,6 +73,7 @@ public class IdentityJDBCDAO implements IdentityDAO {
 		}
 	}
 
+	 /**Returns all records from table as a List of Identity objects**/
 	@Override
 	public List<Identity> search() {
 		final List<Identity> identities = new ArrayList<>();
@@ -129,6 +131,9 @@ public class IdentityJDBCDAO implements IdentityDAO {
 	 * (non-Javadoc)
 	 * @see fr.epita.iam.service.IdentityDAO#update(fr.epita.iam.datamodel.Identity)
 	 */
+	
+	  /**Updates a specific record depending on "id"
+     * after you pass new identity object with new values**/
 	@Override
 	public void update(Identity identity) {
 		
@@ -164,6 +169,8 @@ public class IdentityJDBCDAO implements IdentityDAO {
 	 * (non-Javadoc)
 	 * @see fr.epita.iam.service.IdentityDAO#delete(fr.epita.iam.datamodel.Identity)
 	 */
+	
+	   /**Deletes single record depending on "id" you provide... this method is meant to be verbose**/
 	@Override
 	public void delete(Identity identity) throws IdentityCreationException {
 		
@@ -186,6 +193,7 @@ public class IdentityJDBCDAO implements IdentityDAO {
         }
 	}
 
+	/**Returns specific record (single Identity object) from table depending on "id" you provide**/
 	public Identity locate(String identity_id) {
 		Identity identity = new Identity();
 		Connection connection = null;

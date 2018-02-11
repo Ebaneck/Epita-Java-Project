@@ -19,6 +19,8 @@ import fr.epita.iam.service.IdentityJDBCDAO;
  * 
  *
  */
+
+/**After running this, you will -> Insert a new record. Create a new identity instance**/
 public class CreateIdentity {
 	
 	
