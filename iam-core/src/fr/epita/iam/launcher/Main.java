@@ -5,6 +5,7 @@
  */
 package fr.epita.iam.launcher;
 
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -21,7 +22,7 @@ import fr.epita.iam.service.Configuration;
 public class Main {
 
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 		/*
 		Identity id1 = new Identity();
 		id1.setDisplayName("Thomas");
@@ -74,19 +75,19 @@ public class Main {
 						break;
 					case "2":
 						//modify
-						
-						//UpdateIdentity.update(scanner);
+
+						UpdateIdentity.update(scanner);
 
 						break;
 					case "3":
 						//delete
 						DeleteIdentity.deletion(scanner);
-
 						break;
 					case "4":
 						System.out.println("Do You really want to quit : y/n");
 						confirm = scanner.nextLine();
 						if (!confirm.equalsIgnoreCase("yes")) {
+							System.exit(0);
 							break;
 						}
 
@@ -106,10 +107,6 @@ public class Main {
 					System.out.println("Invalid Username & Password!");
 				} 
 			} catch (Exception e) {
-				
-				LOGGER.info("Logging an INFO-level message during program execution");
-				LOGGER.info("An issue has occured, please restart the application");
-				LOGGER.info("If this persist, send us a bug report");
 				// TODO: handle exception
 			}
 

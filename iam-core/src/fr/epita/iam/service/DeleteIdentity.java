@@ -30,7 +30,7 @@ public class DeleteIdentity {
 	
 		System.out.println("Select an Identity from the list below");
 		for(Identity i : identities){
-			System.out.println("ID : "+i.getUid()+ " \n"+i);
+			System.out.println("Unique ID : "+i.getId()+ " \n"+i);
 		}
 		String identity_id = scanner.nextLine();
 		if (identity_id.isEmpty()) {

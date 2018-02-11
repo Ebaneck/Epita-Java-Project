@@ -10,10 +10,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 
 import fr.epita.iam.datamodel.Identity;
 
 import fr.epita.iam.exceptions.IdentityCreationException;
+
 import fr.epita.logger.Logger;
 
 /**
@@ -81,7 +83,7 @@ public class IdentityJDBCDAO implements IdentityDAO {
 		try {
 			connection = getConnection();
 			final PreparedStatement preparedStatement = connection
-					.prepareStatement("select UID, DISPLAY_NAME, EMAIL FROM IDENTITIES ");
+					.prepareStatement("select UID, DISPLAY_NAME, EMAIL, IDENTITY_ID FROM IDENTITIES");
 			//.prepareStatement("select * from IDENTITIES");
 			//preparedStatement.setString(1, criteria.getUid());
 			//preparedStatement.setString(3, criteria.getDisplayName());
@@ -93,6 +95,7 @@ public class IdentityJDBCDAO implements IdentityDAO {
 				identity.setDisplayName(resultSet.getString(2));
 				identity.setEmail(resultSet.getString(3));
 				identity.setUid(resultSet.getString(1));
+				identity.setId(resultSet.getInt(4));
 				identities.add(identity);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
@@ -130,27 +133,27 @@ public class IdentityJDBCDAO implements IdentityDAO {
 	public void update(Identity identity) {
 		
 		Connection connection = null;
-		        try {
-		        	try {
-						connection = getConnection();
-					} catch (ClassNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-		            PreparedStatement preparedStatement = connection
-		                    .prepareStatement("delete from IDENTITIES where UIDs=?");
-		            // Parameters start with 1
-		            preparedStatement.setString(1, identity.getUid());
-		            preparedStatement.executeUpdate();
+		
+		try {
+			connection = getConnection();
+			//String sql = "update IDENTITIES  set UID=?, "+ "DISPLAY_NAME=?, "+ "EMAIL=? "+ " where IDENTITY_ID=?";
+			PreparedStatement statement = connection.prepareStatement("update IDENTITIES set DISPLAY_NAME=?, EMAIL=?, UID=?" +
+                    "where IDENTITY_ID=?");
+			statement.setString(1, identity.getDisplayName());
+			statement.setString(2, identity.getEmail());
+			statement.setString(3, identity.getUid());
+			statement.setInt(4, identity.getId());
+			
+			statement.executeUpdate();
 
-		        } catch (SQLException e) {
-		            e.printStackTrace();
-		        }
 		    }
+		catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 		
 
 	
-
+	}
 	
 	
 	
@@ -173,9 +176,9 @@ public class IdentityJDBCDAO implements IdentityDAO {
 				e.printStackTrace();
 			}
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("delete from IDENTITIES where UID=?");
+                    .prepareStatement("delete from IDENTITIES where IDENTITY_ID=?");
             // Parameters start with 1
-            preparedStatement.setString(1, identity.getUid());
+            preparedStatement.setInt(1, identity.getId());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -189,15 +192,17 @@ public class IdentityJDBCDAO implements IdentityDAO {
 		 try {
 			 connection = getConnection();
 	            PreparedStatement preparedStatement = connection.
-	                    prepareStatement("select * from IDENTITIES where UID = ?");
+	                    prepareStatement("select * from IDENTITIES where IDENTITY_ID = ?"); //change it to check IDENTITY_ID
 	            preparedStatement.setString(1, identity_id);
 	            
 	            ResultSet rs = preparedStatement.executeQuery();
 
 	            if (rs.next()) {
+	            	identity.setId(rs.getInt("IDENTITY_ID"));
 	                identity.setUid(rs.getString("UID"));
 	                identity.setDisplayName(rs.getString("DISPLAY_NAME"));
 	                identity.setEmail(rs.getString("EMAIL"));
+	                
 	            }
 	        } catch (SQLException e) {
 	            e.printStackTrace();

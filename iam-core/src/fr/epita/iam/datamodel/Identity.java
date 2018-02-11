@@ -24,6 +24,7 @@ public class Identity {
 	private String displayName;
 	private String email;
 	private String uid;
+	private int id; //change the name later
 
 
 
@@ -143,6 +144,14 @@ public class Identity {
 			return false;
 		}
 		return true;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 

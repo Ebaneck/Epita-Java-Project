@@ -1,0 +1,3 @@
+select * from IDENTITIES
+
+update IDENTITIES set DISPLAY_NAME='binoy', EMAIL='xyz@gmail.com' where UID='220202'
