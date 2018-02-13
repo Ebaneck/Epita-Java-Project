@@ -11,6 +11,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import fr.epita.iam.service.IdentityJDBCDAO;
+import fr.epita.iam.service.SearchIdentity;
 import fr.epita.iam.service.UpdateIdentity;
 import fr.epita.iam.service.CreateIdentity;
 import fr.epita.iam.service.DeleteIdentity;
@@ -70,8 +71,8 @@ public class Main {
 			        System.out.println("|        1. Create Identity     |");
 			        System.out.println("|        2. Update Identity     |");
 			        System.out.println("|        3. Delete Identity     |");
-			        //System.out.println("|        4. Delete Database Records     |");
-			        System.out.println("|        4. Exit                |");
+			        System.out.println("|        4. List/View Database  |");
+			        System.out.println("|        5. Exit                |");
 			        System.out.println("*****************************************");
 					String choice = scanner.nextLine();
 
@@ -93,7 +94,15 @@ public class Main {
 						//delete
 						DeleteIdentity.deletion(scanner);
 						break;
+						
 					case "4":
+						
+						//search and print current list of identities found withing the database
+						
+						SearchIdentity.search(scanner);
+						break;	
+						
+					case "5":
 						System.out.println("Goodbye  " + Username);
 						 System.exit(0); 
 			              break;
