@@ -39,7 +39,7 @@ public class CreateIdentity {
 		String email = create.nextLine();
 		
 		
-		Identity identity = new Identity(uid, displayName, email);
+		Identity identity = new Identity(displayName, email, uid);
 		
 	
 		//We persist and write out the identity created into our database
