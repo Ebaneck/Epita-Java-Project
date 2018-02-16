@@ -13,6 +13,8 @@ Source material : http://thomas-broussard.fr/work/java/courses/project/fundament
 
 Project Documentation link : https://docs.google.com/document/d/1q568PkmbPUT8zhzW_Q6aVXpmUVdgVG7sG4LY_Qgr0ac/edit?usp=sharing
 
+Project User guide : https://docs.google.com/document/d/1ljlT0OE20A0t_gL_RgPtLFKctg_1Ir40MaSMII27plA/edit?usp=sharing
+
 Teacher: Thomas Broussard
 
 
