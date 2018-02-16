@@ -1,8 +1,4 @@
-/**
- * Ce fichier est la propriété de Thomas BROUSSARD
- * Code application :
- * Composant :
- */
+
 package fr.epita.iam.services.test;
 
 import java.sql.Connection;
@@ -17,21 +13,7 @@ import fr.epita.iam.exceptions.IdentityCreationException;
 import fr.epita.iam.service.Configuration;
 import fr.epita.iam.service.IdentityJDBCDAO;
 
-/**
- * <h3>Description</h3>
- * <p>This class allows to ...</p>
- *
- * <h3>Usage</h3>
- * <p>This class should be used as follows:
- *   <pre><code>${type_name} instance = new ${type_name}();</code></pre>
- * </p>
- *
- * @since $${version}
- * @see See also $${link}
- * @author ${user}
- *
- * ${tags}
- */
+
 public class TestDataBaseOperations {
 
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
@@ -42,27 +24,7 @@ public class TestDataBaseOperations {
 		testCreateSearchFromDAO();
 	}
 
-	/**
-	 * <h3>Description</h3>
-	 * <p>This methods allows to ...</p>
-	 *
-	 * <h3>Usage</h3>
-	 * <p>It should be used as follows :
-	 *
-	 * <pre><code> ${enclosing_type} sample;
-	 *
-	 * //...
-	 *
-	 * sample.${enclosing_method}();
-	 *</code></pre>
-	 * </p>
-	 *
-	 * @since $${version}
-	 * @see Voir aussi $${link}
-	 * @author ${user}
-	 *
-	 * ${tags}
-	 */
+	
 	private static void createTest() throws ClassNotFoundException, SQLException {
 		final Connection connection = getConnection();
 
@@ -77,32 +39,7 @@ public class TestDataBaseOperations {
 		connection.close();
 	}
 
-	/**
-	 * <h3>Description</h3>
-	 * <p>
-	 * This methods allows to ...
-	 * </p>
-	 *
-	 * <h3>Usage</h3>
-	 * <p>
-	 * It should be used as follows :
-	 *
-	 * <pre>
-	 * <code> ${enclosing_type} sample;
-	 *
-	 * //...
-	 *
-	 * sample.${enclosing_method}();
-	 *</code>
-	 * </pre>
-	 * </p>
-	 *
-	 * @since $${version}
-	 * @see Voir aussi $${link}
-	 * @author ${user}
-	 *
-	 *         ${tags}
-	 */
+	
 	private static void testConnectAndSelect() throws ClassNotFoundException, SQLException {
 		final Connection connection = getConnection();
 
@@ -186,32 +123,6 @@ public class TestDataBaseOperations {
 		return connection;
 	}
 
-	/**
-	 * <h3>Description</h3>
-	 * <p>
-	 * This methods allows to ...
-	 * </p>
-	 *
-	 * <h3>Usage</h3>
-	 * <p>
-	 * It should be used as follows :
-	 *
-	 * <pre>
-	 * <code> ${enclosing_type} sample;
-	 *
-	 * //...
-	 *
-	 * sample.${enclosing_method}();
-	 *</code>
-	 * </pre>
-	 * </p>
-	 *
-	 * @since $${version}
-	 * @see Voir aussi $${link}
-	 * @author ${user}
-	 *
-	 *         ${tags}
-	 */
 	private static void differenceBetweenPreparedStatementAndStatement() throws ClassNotFoundException, SQLException {
 		final Connection connection = getConnection();
 		final PreparedStatement prepareStatement = connection.prepareStatement("select * from IDENTITIES where DISPLAY_NAME = ?");

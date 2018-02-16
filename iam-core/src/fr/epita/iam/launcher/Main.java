@@ -1,22 +1,13 @@
-/**
- * 
- * Code application :
- * Composant : 
- */
+
 package fr.epita.iam.launcher;
 
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 import java.util.Scanner;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-import fr.epita.iam.service.IdentityJDBCDAO;
 import fr.epita.iam.service.SearchIdentity;
 import fr.epita.iam.service.UpdateIdentity;
 import fr.epita.iam.service.CreateIdentity;
 import fr.epita.iam.service.DeleteIdentity;
-import fr.epita.iam.datamodel.Identity;
-import fr.epita.iam.service.Configuration;
 
 
 
@@ -24,15 +15,7 @@ public class Main {
 
 	
 	public static void main(String[] args) throws SQLException {
-		/*
-		Identity id1 = new Identity();
-		id1.setDisplayName("Thomas");
-		id1.setUid("123");
-		id1.setEmail("tbr@tbr.com");
 		
-		System.out.println(id1);
-		
-		*/
 
 		  Logger LOGGER = Logger.getLogger("InfoLogging");
 
@@ -129,7 +112,7 @@ public class Main {
 					System.out.println("Invalid Username & Password!");
 				} 
 			} catch (Exception e) {
-				// TODO: handle exception
+				
 			}
 
 		    

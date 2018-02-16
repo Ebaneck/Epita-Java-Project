@@ -1,8 +1,4 @@
-/**
 
- * Code application :
- * Composant :
- */
 package fr.epita.iam.services.test;
 
 import java.io.IOException;
@@ -13,21 +9,7 @@ import fr.epita.iam.exceptions.IdentityCreationException;
 import fr.epita.iam.service.FileIdentityDAO;
 import fr.epita.iam.service.IdentityDAO;
 
-/**
- * <h3>Description</h3>
- * <p>Cette classe permet de ...</p>
- *
- * <h3>Utilisation</h3>
- * <p>Elle s'utilise de la manière suivante :
- *   <pre><code>${type_name} instance = new ${type_name}();</code></pre>
- * </p>
- *
- * @since $${version}
- * @see Voir aussi $${link}
- * @author ${user}
- *
- * ${tags}
- */
+
 public class TestFileOperations {
 
 
@@ -37,27 +19,7 @@ public class TestFileOperations {
 
 	}
 
-	/**
-	 * <h3>Description</h3>
-	 * <p>This methods allows to ...</p>
-	 *
-	 * <h3>Usage</h3>
-	 * <p>It should be used as follows :
-	 *
-	 * <pre><code> ${enclosing_type} sample;
-	 *
-	 * //...
-	 *
-	 * sample.${enclosing_method}();
-	 *</code></pre>
-	 * </p>
-	 *
-	 * @since $${version}
-	 * @see Voir aussi $${link}
-	 * @author ${user}
-	 *
-	 * ${tags}
-	 */
+	
 	private static void testCreateAndSearch() throws IOException {
 		// Given : initial context
 		final IdentityDAO dao = new FileIdentityDAO("/tmp/2017s2_b/identities.txt");
