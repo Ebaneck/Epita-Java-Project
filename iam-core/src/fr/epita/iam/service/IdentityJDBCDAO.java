@@ -1,6 +1,11 @@
 
 package fr.epita.iam.service;
 
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -207,6 +212,119 @@ public class IdentityJDBCDAO implements IdentityDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
+	
+	private String md5(String aString) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        MessageDigest md;
+        String hex;
+        StringBuffer hexString;
+        byte[] bytesOfMessage;
+        byte[] theDigest;
+ 
+        hexString = new StringBuffer();
+        bytesOfMessage = aString.getBytes("UTF-8");
+        md = MessageDigest.getInstance("MD5");
+        theDigest = md.digest(bytesOfMessage);
+ 
+        for (int i = 0; i < theDigest.length; i++) {
+            hex = Integer.toHexString(0xff & theDigest[i]);
+            if (hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+ 
+        return hexString.toString();
+    }
+ 
+    
+	/*
+	 * 
+	 *public method to create a user within the database
+	 *  paramenters needed include a username and a password
+	 *  
+	 *  This method creates a salt of the given password for security purposes
+	 *  It is our own way of implementing md5 encryption using the java standard
+	 */
+	
+    public boolean createUser(String user, String password) throws ClassNotFoundException {
+        SecureRandom random;
+        String insert;
+        String salt;
+ 
+        random = new SecureRandom();
+        salt =  new BigInteger(130, random).toString(16);
+        Connection connection = null;
+      
+ 
+        try {
+        
+        	
+        	connection = getConnection();
+        	final PreparedStatement preparedStatement = connection
+					.prepareStatement("INSERT INTO USERS (USERNAME, PASS_SALT, PASS_MD5) values (?, ?, ?)");
+        	
+         	
+        	preparedStatement.setString(1, user);
+        	preparedStatement.setString(2, salt);
+        	preparedStatement.setString(3, this.md5(salt + password));
+        	preparedStatement.executeUpdate();
+ 
+            return true;
+        } catch(NoSuchAlgorithmException | SQLException | UnsupportedEncodingException ex) {
+            return false;
+        }
+    }
+ 
+    
+    /*
+	 * 
+	 *This method is used to authenticate a user
+	 *
+	 *Given a set of parameters, the method checks the database for the corresponding username and password
+	 *this is accomplished by using a hashing out the md5 stored password before comparing if the passwords match
+	 */
+    public boolean authenticateUser(String user, String password) throws ClassNotFoundException {
+        String pass_md5;
+        String pass_salt;
+        ResultSet res;
+
+        res = null;
+        Connection connection = null;
+ 
+        try {
+        	connection = getConnection();
+        	final PreparedStatement preparedStatement = connection
+					.prepareStatement("SELECT PASS_SALT, PASS_MD5 FROM USERS WHERE USERNAME = ?");
+        	preparedStatement.setString(1, user);
+        	
+            res = preparedStatement.executeQuery();
+ 
+            res.next(); // We assume that username is unique
+ 
+            pass_salt = res.getString(1);
+            pass_md5 = res.getString(2);
+ 
+            if(pass_md5.equals(this.md5(pass_salt + password))) {
+                return true;
+            } else {
+                return false;
+            }
+ 
+        } catch(NoSuchAlgorithmException | SQLException | UnsupportedEncodingException ex) {
+            return false;
+        } finally {
+            try {
+                if (res instanceof ResultSet && !res.isClosed()) {
+                    res.close();
+                }
+            } catch(SQLException ex) {
+            }
+        }
+    }
+ 
+   
 	
 
 }

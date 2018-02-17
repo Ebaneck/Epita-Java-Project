@@ -8,7 +8,18 @@ import fr.epita.iam.service.SearchIdentity;
 import fr.epita.iam.service.UpdateIdentity;
 import fr.epita.iam.service.CreateIdentity;
 import fr.epita.iam.service.DeleteIdentity;
-
+import fr.epita.iam.service.IdentityJDBCDAO;
+import java.io.UnsupportedEncodingException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.math.BigInteger;
+import fr.epita.iam.datamodel.Authenticate;
 
 
 public class Main {
@@ -17,30 +28,44 @@ public class Main {
 	public static void main(String[] args) throws SQLException {
 		
 
-		  Logger LOGGER = Logger.getLogger("InfoLogging");
-
-		    String Username;
-		    String Password;
-
-		    Password = "123";
-		    Username = "wisdom";
-		    
-		    String confirm = "yes";
-
-		    Scanner input1 = new Scanner(System.in);
-		    System.out.println("Enter Username : ");
+		IdentityJDBCDAO jdbcdao = new IdentityJDBCDAO();
+		 boolean quit = false;
+		 boolean isauthenticated = false;
+		 
+		 System.out.print("This is the beginning of Iam Core Program....." + "\n");
+		 System.out.print("Let us create an administrator account" + "\n");
+		 
+		 Scanner input1 = new Scanner(System.in);
+		    System.out.println("Enter admin Username : ");
 		    String username = input1.next();
 
 		    Scanner input2 = new Scanner(System.in);
-		    System.out.println("Enter Password : ");
+		    System.out.println("Enter admin Password : ");
 		    String password = input2.next();
-		    
-		    boolean quit = false;
-		    
+		
+		
+		try {
+			if (jdbcdao.createUser(username, password)) {
+			    System.out.println("User created");
+			}
+		
+
+        if (jdbcdao.authenticateUser(username, password)) {
+            System.out.println("User authenticated");
+            isauthenticated = true;
+        }
+        
+        	
+		}
+        catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        		    
 		 
 
 		    try {
-				if (username.equals(Username) && password.equals(Password)) {
+				if (isauthenticated) {
 
 					System.out.println("Access Granted! Welcome To!");
 
@@ -90,7 +115,7 @@ public class Main {
 						
 					case "5":
 						 quit = true;
-						System.out.println("Goodbye  " + Username);
+						System.out.println("Goodbye  " + username);
 						 System.exit(0); 
 			              break;
 						
@@ -104,13 +129,7 @@ public class Main {
 					 } while (!quit);
 				}
 
-				else if (username.equals(Username)) {
-					System.out.println("Invalid Password!");
-				} else if (password.equals(Password)) {
-					System.out.println("Invalid Username!");
-				} else {
-					System.out.println("Invalid Username & Password!");
-				} 
+				 
 			} catch (Exception e) {
 				
 			}
