@@ -32,9 +32,10 @@ public class IdentityJDBCDAO implements IdentityDAO {
 	@Override
 	public void create(Identity identity) throws IdentityCreationException {
 		Connection connection = null;
+		PreparedStatement preparedStatement = null;
 		try {
 			connection = getConnection();
-			final PreparedStatement preparedStatement = connection
+			preparedStatement = connection
 					.prepareStatement("INSERT INTO IDENTITIES(UID, DISPLAY_NAME, EMAIL) values (?,?,?) ");
 			preparedStatement.setString(1, identity.getUid());
 			preparedStatement.setString(2, identity.getDisplayName());
@@ -50,6 +51,10 @@ public class IdentityJDBCDAO implements IdentityDAO {
 			try {
 				if (connection != null) {
 					connection.close();
+				}
+				
+				if(preparedStatement != null) {
+					preparedStatement.close();
 				}
 			} catch (final SQLException e) {
 				System.out.println(e.getMessage());
@@ -103,10 +108,10 @@ public class IdentityJDBCDAO implements IdentityDAO {
 	private static Connection getConnection() throws ClassNotFoundException, SQLException {
 
 		final String connectionString = Configuration.getInstance().getProperty("db.host");
-		final String userName = "root";
-		final String password = "password";
+		final String userName = "root"; //bad coding
+		final String password = "password"; //same as above
 
-		Class.forName("org.apache.derby.jdbc.ClientDriver");
+		Class.forName("org.apache.derby.jdbc.ClientDriver"); // ""
 
 		final Connection connection = DriverManager.getConnection(connectionString, userName, password);
 		return connection;
@@ -215,7 +220,7 @@ public class IdentityJDBCDAO implements IdentityDAO {
 	
 	
 	
-	private String md5(String aString) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+	public String md5(String aString) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         MessageDigest md;
         String hex;
         StringBuffer hexString;
@@ -249,6 +254,8 @@ public class IdentityJDBCDAO implements IdentityDAO {
 	 */
 	
     public boolean createUser(String user, String password) throws ClassNotFoundException {
+    	
+    	System.out.print("Let us create an administrator account" + "\n");
         SecureRandom random;
         String insert;
         String salt;
@@ -334,21 +341,19 @@ public class IdentityJDBCDAO implements IdentityDAO {
      * @return 
      */
     
-    public boolean userexist(String admin_id) {
+    public boolean userexist(String admin_id) {   //with an integer before
 		Connection connection = null;
-		boolean isContain = false;
 		 try {
 			 connection = getConnection();
 	            PreparedStatement preparedStatement = connection.
 	                    prepareStatement("select * from USERS where USERNAME = ?"); //change it to check IDENTITY_ID
-	            preparedStatement.setString(1, admin_id);
+	            preparedStatement.setString(1, admin_id); //TODO now it will compare the unique combo of name and pass
 	            
 	            ResultSet rs = preparedStatement.executeQuery();
 
 	            if (rs.next()) {
-	            	isContain = true;
-	            	
-	            }
+	            	return true;
+	            } //is it there in the db? i deleted 
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	            System.out.println("No Data Found");  //data not exist
@@ -356,7 +361,7 @@ public class IdentityJDBCDAO implements IdentityDAO {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		return true;
+		return false; //wrong.
 
 	       
 	    }

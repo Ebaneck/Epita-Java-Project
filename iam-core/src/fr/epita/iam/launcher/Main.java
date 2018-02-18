@@ -1,27 +1,18 @@
 
 package fr.epita.iam.launcher;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Scanner;
-import java.util.logging.Logger;
-import fr.epita.iam.service.SearchIdentity;
-import fr.epita.iam.service.UpdateIdentity;
+
 import fr.epita.iam.service.CreateIdentity;
 import fr.epita.iam.service.DeleteIdentity;
 import fr.epita.iam.service.IdentityJDBCDAO;
-import java.io.UnsupportedEncodingException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.math.BigInteger;
-import fr.epita.iam.datamodel.Authenticate;
+import fr.epita.iam.service.SearchIdentity;
+import fr.epita.iam.service.UpdateIdentity;
 
-
+//the code.
 public class Main {
 
 	
@@ -31,11 +22,16 @@ public class Main {
 		IdentityJDBCDAO jdbcdao = new IdentityJDBCDAO();
 		 boolean quit = false;
 		 boolean isauthenticated = false;
+		 boolean userExist=false;
 		 
 		 System.out.print("This is the beginning of Iam Core Program....." + "\n");
-		 System.out.print("Let us create an administrator account" + "\n");
 		 do { 
-		 Scanner input1 = new Scanner(System.in);
+			 
+			if(userExist && !isauthenticated) {
+				System.out.println("User Exists and Authentication issue, please try entering the creds again.");
+			}
+			 
+			Scanner input1 = new Scanner(System.in);
 		    System.out.println("Enter admin Username : ");
 		    String username = input1.next();
 
@@ -46,15 +42,12 @@ public class Main {
 		
 		   
 		try {
+		
 			if (jdbcdao.userexist(username)) {
-				System.out.println("Admin user exist.... Login with it" + "\n"); 
-				
-				//System.out.println("Login with this user or reset the password"); 
+				userExist=true;
 			}
-			
-			
-			else if (jdbcdao.createUser(username, password)) {
-			    System.out.println("User created");
+			else if (jdbcdao.createUser(username, password)) { //lets debug again
+				System.out.println("User created");
 			
 			}
 
