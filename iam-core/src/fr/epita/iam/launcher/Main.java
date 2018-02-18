@@ -47,9 +47,9 @@ public class Main {
 		   
 		try {
 			if (jdbcdao.userexist(username)) {
-				System.out.println("Admin user has been created already" + "\n"); 
+				System.out.println("Admin user exist.... Login with it" + "\n"); 
 				
-				System.out.println("Login with this user or reset the password"); 
+				//System.out.println("Login with this user or reset the password"); 
 			}
 			
 			
@@ -59,7 +59,7 @@ public class Main {
 			}
 
         if (jdbcdao.authenticateUser(username, password)) {
-            System.out.println("User authenticated");
+           // System.out.println("User authenticated");
             isauthenticated = true;
         }
         
