@@ -20,7 +20,9 @@ Running the application:
 We have enhanced the running of the application by adding a launchable bat file for windows users. This file in present in the root
 directory, but users need to edit it with appropriate information before executing it.
 
-Our goal is to make the execution of this application seamless and effortly.
+Our goal is to make the execution of this application seamless and effortless.
+
+
 
 Teacher: Thomas Broussard
 
