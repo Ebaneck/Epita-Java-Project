@@ -323,6 +323,44 @@ public class IdentityJDBCDAO implements IdentityDAO {
             }
         }
     }
+    
+    /**
+     * 
+     * @param admin_id
+     * 
+     * verify if an admin user exist already within the database
+     * 
+     * this ensures only a single admin account can exist within the database 
+     * @return 
+     */
+    
+    public boolean userexist(String admin_id) {
+		Connection connection = null;
+		boolean isContain = false;
+		 try {
+			 connection = getConnection();
+	            PreparedStatement preparedStatement = connection.
+	                    prepareStatement("select * from USERS where USERNAME = ?"); //change it to check IDENTITY_ID
+	            preparedStatement.setString(1, admin_id);
+	            
+	            ResultSet rs = preparedStatement.executeQuery();
+
+	            if (rs.next()) {
+	            	isContain = true;
+	            	
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            System.out.println("No Data Found");  //data not exist
+	        } catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		return true;
+
+	       
+	    }
+		// TODO Auto-generated method stub
  
    
 	

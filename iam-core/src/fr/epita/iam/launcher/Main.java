@@ -34,7 +34,7 @@ public class Main {
 		 
 		 System.out.print("This is the beginning of Iam Core Program....." + "\n");
 		 System.out.print("Let us create an administrator account" + "\n");
-		 
+		 do { 
 		 Scanner input1 = new Scanner(System.in);
 		    System.out.println("Enter admin Username : ");
 		    String username = input1.next();
@@ -44,11 +44,19 @@ public class Main {
 		    String password = input2.next();
 		
 		
+		   
 		try {
-			if (jdbcdao.createUser(username, password)) {
-			    System.out.println("User created");
+			if (jdbcdao.userexist(username)) {
+				System.out.println("Admin user has been created already" + "\n"); 
+				
+				System.out.println("Login with this user or reset the password"); 
 			}
-		
+			
+			
+			else if (jdbcdao.createUser(username, password)) {
+			    System.out.println("User created");
+			
+			}
 
         if (jdbcdao.authenticateUser(username, password)) {
             System.out.println("User authenticated");
@@ -61,7 +69,7 @@ public class Main {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-        		    
+	} while (!isauthenticated);
 		 
 
 		    try {
@@ -115,7 +123,7 @@ public class Main {
 						
 					case "5":
 						 quit = true;
-						System.out.println("Goodbye  " + username);
+						System.out.println("Goodbye  ");
 						 System.exit(0); 
 			              break;
 						
