@@ -23,13 +23,15 @@ import fr.epita.iam.service.IdentityJDBCDAO;
 /**After running this, you will -> Insert a new record. Create a new identity instance**/
 public class CreateIdentity {
 	
+	private CreateIdentity() {}
+	
 	
 	
 	/**
 	 * This method creates an Identity from user inputs
 	 * @param scanner: Used to collect user input
 	 */
-	public static void CreateIdentity(Scanner create){
+	public static void makeIdentity(Scanner create){
 		System.out.println("Identity Creation takes place here:");
 		System.out.println("Enter a userID");
 		String uid = create.nextLine();
@@ -48,7 +50,7 @@ public class CreateIdentity {
 		try {
 			identityJDBCDAO.create(identity);
 		} catch (IdentityCreationException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		System.out.println("Identity successfully created");

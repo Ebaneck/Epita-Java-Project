@@ -161,6 +161,8 @@ public class IdentityXMLDAO implements IdentityDAO {
 	 */
 	@Override
 	public void update(Identity identity) {
+		
+		// Update an identity.
 
 	}
 
@@ -170,6 +172,7 @@ public class IdentityXMLDAO implements IdentityDAO {
 	 */
 	@Override
 	public void delete(Identity identity) {
+		//delete an identity
 
 	}
 
@@ -236,7 +239,6 @@ public class IdentityXMLDAO implements IdentityDAO {
 
 	private String evaluateXpathAsText(String xpathExpr, Node el) {
 		String result = "";
-		final List<Element> elements = new ArrayList<>();
 		try {
 			result = (String) XPATH_FACTORY.newXPath().evaluate(xpathExpr, el, XPathConstants.STRING);
 		} catch (final XPathExpressionException e) {
@@ -248,54 +250,9 @@ public class IdentityXMLDAO implements IdentityDAO {
 
 	@Override
 	public List<Identity> search() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see fr.epita.iam.service.IdentityDAO#search(fr.epita.iam.datamodel.Identity)
-	 */
-	// @Override
-	// public List<Identity> search(Identity criteria) {
-	// final List<Identity> list = new ArrayList<>();
-	// final NodeList identityNodeList = document.getElementsByTagName("identity");
-	// for (int i = 0; i < identityNodeList.getLength(); i++) {
-	// final Node identityNode = identityNodeList.item(i);
-	// if (identityNode instanceof Element) {
-	// final Element identityElement = (Element) identityNode;
-	// final NodeList properties = identityElement.getElementsByTagName("property");
-	// final Identity identity = new Identity();
-	// list.add(identity);
-	// for (int j = 0; j < properties.getLength(); j++) {
-	//
-	// final Node propertyNode = properties.item(j);
-	// if (propertyNode instanceof Element) {
-	// final Element propertyElement = (Element) propertyNode;
-	// final String propertyName = propertyElement.getAttribute("name");
-	// final String propertyValue = propertyElement.getTextContent().trim();
-	// switch (propertyName) {
-	// case "displayName":
-	// identity.setDisplayName(propertyValue);
-	// break;
-	// case "email":
-	// identity.setEmail(propertyValue);
-	// break;
-	// case "uid":
-	// identity.setUid(propertyValue);
-	// break;
-	// }
-	//
-	// }
-	//
-	// }
-	//
-	// }
-	//
-	// }
-	//
-	// return list;
-	// }
-
-
+	
 }

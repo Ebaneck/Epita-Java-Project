@@ -16,7 +16,7 @@ import fr.epita.iam.service.IdentityJDBCDAO;
 
 public class DeleteIdentity {
 	
-	
+	private DeleteIdentity() {}
 
 	/**
 	 * This method deletes an existing Identity

@@ -52,14 +52,14 @@ public class Main {
 			}
 
         if (jdbcdao.authenticateUser(username, password)) {
-           // System.out.println("User authenticated");
+          
             isauthenticated = true;
         }
         
         	
 		}
         catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
+			
 			e1.printStackTrace();
 		}
 	} while (!isauthenticated);
@@ -92,7 +92,7 @@ public class Main {
 					case "1":
 						//create
 						/**method to invoke the creation of a new identity**/
-						CreateIdentity.CreateIdentity(scanner);
+						CreateIdentity.makeIdentity(scanner);
 
 						break;
 					case "2":
@@ -132,6 +132,7 @@ public class Main {
 
 				 
 			} catch (Exception e) {
+				 e.printStackTrace();
 				
 			}
 

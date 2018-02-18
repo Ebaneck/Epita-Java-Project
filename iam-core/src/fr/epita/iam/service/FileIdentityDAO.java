@@ -131,7 +131,7 @@ public class FileIdentityDAO implements IdentityDAO {
 
 	@Override
 	public List<Identity> search() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

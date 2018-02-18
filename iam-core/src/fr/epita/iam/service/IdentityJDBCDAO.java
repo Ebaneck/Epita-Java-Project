@@ -58,6 +58,7 @@ public class IdentityJDBCDAO implements IdentityDAO {
 				}
 			} catch (final SQLException e) {
 				System.out.println(e.getMessage());
+				
 				e.printStackTrace();
 			}
 		}
@@ -68,18 +69,14 @@ public class IdentityJDBCDAO implements IdentityDAO {
 	public List<Identity> search() {
 		final List<Identity> identities = new ArrayList<>();
 		
-		// TODO reduce the number of lines to avoid repetition
-		// the pattern is always the same, improve with your own ideas.
-		// check lambda expressions
+		
 		Connection connection = null;
+		PreparedStatement preparedStatement = null;
 		try {
 			connection = getConnection();
-			final PreparedStatement preparedStatement = connection
+			 preparedStatement = connection
 					.prepareStatement("select UID, DISPLAY_NAME, EMAIL, IDENTITY_ID FROM IDENTITIES");
-			//.prepareStatement("select * from IDENTITIES");
-			//preparedStatement.setString(1, criteria.getUid());
-			//preparedStatement.setString(3, criteria.getDisplayName());
-			//preparedStatement.setString(2, criteria.getEmail());
+			
 
 			final ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
@@ -93,13 +90,22 @@ public class IdentityJDBCDAO implements IdentityDAO {
 		} catch (ClassNotFoundException | SQLException e) {
 			LOGGER.error("error while searching", e);
 		} finally {
-			try {
-				if (connection != null) {
+			
+				try {
 					connection.close();
+				} catch (SQLException e1) {
+					
+					e1.printStackTrace();
 				}
-			} catch (final SQLException e) {
-				LOGGER.error("unresolved error", e);
-			}
+				try {
+					preparedStatement.close();
+				} catch (SQLException e) {
+				
+					e.printStackTrace();
+				}
+				
+				
+			
 		}
 
 		return identities;
@@ -108,8 +114,8 @@ public class IdentityJDBCDAO implements IdentityDAO {
 	private static Connection getConnection() throws ClassNotFoundException, SQLException {
 
 		final String connectionString = Configuration.getInstance().getProperty("db.host");
-		final String userName = "root"; //bad coding
-		final String password = "password"; //same as above
+		final String userName = Configuration.getInstance().getProperty("db.username");
+		final String password = Configuration.getInstance().getProperty("db.password");
 
 		Class.forName("org.apache.derby.jdbc.ClientDriver"); // ""
 
@@ -131,7 +137,7 @@ public class IdentityJDBCDAO implements IdentityDAO {
 		
 		try {
 			connection = getConnection();
-			//String sql = "update IDENTITIES  set UID=?, "+ "DISPLAY_NAME=?, "+ "EMAIL=? "+ " where IDENTITY_ID=?";
+			
 			PreparedStatement statement = connection.prepareStatement("update IDENTITIES set DISPLAY_NAME=?, EMAIL=?, UID=?" +
                     "where IDENTITY_ID=?");
 			statement.setString(1, identity.getDisplayName());
@@ -165,22 +171,27 @@ public class IdentityJDBCDAO implements IdentityDAO {
 	public void delete(Identity identity) throws IdentityCreationException {
 		
 		Connection connection = null;
+		 PreparedStatement preparedStatement = null;
         try {
-        	try {
-				connection = getConnection();
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-            PreparedStatement preparedStatement = connection
+        	connection = getConnection();
+            preparedStatement = connection
                     .prepareStatement("delete from IDENTITIES where IDENTITY_ID=?");
             // Parameters start with 1
             preparedStatement.setInt(1, identity.getId());
             preparedStatement.executeUpdate();
 
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+        
+        finally {
+     	   try {
+     		   preparedStatement.close();
+     	      connection.close();
+     	   } catch (Exception e) {
+     	      // Do something
+     	   }
+     	}
 	}
 
 	/**Returns specific record (single Identity object) from table depending on "id" you provide**/
@@ -205,20 +216,27 @@ public class IdentityJDBCDAO implements IdentityDAO {
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        } catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
+		 
 
 	        return identity;
 	    }
-		// TODO Auto-generated method stub
+		
 
 	public List<Identity> search(Identity criteria) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 	
-	
+	/**
+	 * 
+	 * @param aString
+	 * @return a hexstring composed of md5 encryption
+	 * @throws NoSuchAlgorithmException
+	 * @throws UnsupportedEncodingException
+	 */
 	
 	public String md5(String aString) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         MessageDigest md;
@@ -244,7 +262,7 @@ public class IdentityJDBCDAO implements IdentityDAO {
     }
  
     
-	/*
+	/**
 	 * 
 	 *public method to create a user within the database
 	 *  paramenters needed include a username and a password
@@ -255,21 +273,21 @@ public class IdentityJDBCDAO implements IdentityDAO {
 	
     public boolean createUser(String user, String password) throws ClassNotFoundException {
     	
-    	System.out.print("Let us create an administrator account" + "\n");
+    	System.out.println("Let us create an administrator account" + "\n");
         SecureRandom random;
-        String insert;
         String salt;
  
         random = new SecureRandom();
         salt =  new BigInteger(130, random).toString(16);
         Connection connection = null;
+        PreparedStatement preparedStatement = null;
       
  
         try {
         
         	
         	connection = getConnection();
-        	final PreparedStatement preparedStatement = connection
+        	 preparedStatement = connection
 					.prepareStatement("INSERT INTO USERS (USERNAME, PASS_SALT, PASS_MD5) values (?, ?, ?)");
         	
          	
@@ -282,10 +300,21 @@ public class IdentityJDBCDAO implements IdentityDAO {
         } catch(NoSuchAlgorithmException | SQLException | UnsupportedEncodingException ex) {
             return false;
         }
+        
+       
+        finally {
+        	   try {
+        		   preparedStatement.close();
+        	      connection.close();
+        	   } catch (Exception e) {
+        	      // Do something
+        	   }
+        	} 
+        
     }
  
     
-    /*
+    /**
 	 * 
 	 *This method is used to authenticate a user
 	 *
@@ -293,16 +322,18 @@ public class IdentityJDBCDAO implements IdentityDAO {
 	 *this is accomplished by using a hashing out the md5 stored password before comparing if the passwords match
 	 */
     public boolean authenticateUser(String user, String password) throws ClassNotFoundException {
-        String pass_md5;
-        String pass_salt;
+        String passmd5;
+        String passsalt;
         ResultSet res;
 
         res = null;
         Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        
  
         try {
         	connection = getConnection();
-        	final PreparedStatement preparedStatement = connection
+        	preparedStatement = connection
 					.prepareStatement("SELECT PASS_SALT, PASS_MD5 FROM USERS WHERE USERNAME = ?");
         	preparedStatement.setString(1, user);
         	
@@ -310,10 +341,10 @@ public class IdentityJDBCDAO implements IdentityDAO {
  
             res.next(); // We assume that username is unique
  
-            pass_salt = res.getString(1);
-            pass_md5 = res.getString(2);
+            passsalt = res.getString(1);
+            passmd5 = res.getString(2);
  
-            if(pass_md5.equals(this.md5(pass_salt + password))) {
+            if(passmd5.equals(this.md5(passsalt + password))) {
                 return true;
             } else {
                 return false;
@@ -323,9 +354,10 @@ public class IdentityJDBCDAO implements IdentityDAO {
             return false;
         } finally {
             try {
-                if (res instanceof ResultSet && !res.isClosed()) {
+                    preparedStatement.close();
+                    connection.close();
                     res.close();
-                }
+                
             } catch(SQLException ex) {
             }
         }
@@ -333,7 +365,8 @@ public class IdentityJDBCDAO implements IdentityDAO {
     
     /**
      * 
-     * @param admin_id
+     * @param username 
+     * @param adminUsername
      * 
      * verify if an admin user exist already within the database
      * 
@@ -341,31 +374,29 @@ public class IdentityJDBCDAO implements IdentityDAO {
      * @return 
      */
     
-    public boolean userexist(String admin_id) {   //with an integer before
+    public boolean userexist(String adminUser) {   //with an integer before
 		Connection connection = null;
 		 try {
 			 connection = getConnection();
 	            PreparedStatement preparedStatement = connection.
-	                    prepareStatement("select * from USERS where USERNAME = ?"); //change it to check IDENTITY_ID
-	            preparedStatement.setString(1, admin_id); //TODO now it will compare the unique combo of name and pass
-	            
+	                    prepareStatement("select * from USERS where USERNAME = ?"); 
+	            preparedStatement.setString(1, adminUser); 
 	            ResultSet rs = preparedStatement.executeQuery();
 
 	            if (rs.next()) {
 	            	return true;
-	            } //is it there in the db? i deleted 
+	            } 
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	            System.out.println("No Data Found");  //data not exist
 	        } catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 		return false; //wrong.
 
 	       
 	    }
-		// TODO Auto-generated method stub
  
    
 	
