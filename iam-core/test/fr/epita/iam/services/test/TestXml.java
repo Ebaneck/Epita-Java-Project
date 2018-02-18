@@ -1,8 +1,4 @@
-/**
- * Ce fichier est la propriété de Thomas BROUSSARD
- * Code application :
- * Composant :
- */
+
 package fr.epita.iam.services.test;
 
 import java.io.IOException;
