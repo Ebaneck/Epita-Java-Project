@@ -15,6 +15,13 @@ Project Documentation link : https://docs.google.com/document/d/1q568PkmbPUT8zhz
 
 Project User guide : https://docs.google.com/document/d/1ljlT0OE20A0t_gL_RgPtLFKctg_1Ir40MaSMII27plA/edit?usp=sharing
 
+Running the application:
+
+We have enhanced the running of the application by adding a launchable bat file for windows users. This file in present in the root
+directory, but users need to edit it with appropriate information before executing it.
+
+Our goal is to make the execution of this application seamless and effortly.
+
 Teacher: Thomas Broussard
 
 
