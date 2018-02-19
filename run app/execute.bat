@@ -18,10 +18,10 @@ start cmd /k call ij.bat
 
    ::  run sql command and import the database schema
    
-:: run 'C:\Users\ceban\Desktop\Claude\2017s2_fundamental_b\Epita Java Project\iam-core\sql\init.sql'
+:: run 'init.sql'
 
 
-cd "C:\Users\ceban\Desktop\"
+cd "C:\Users\ceban\Desktop\Claude\2017s2_fundamental_b\Epita Java Project\run app\"
 java -jar  -Dconf=testConfiguration.properties iamcore.jar
 
 
