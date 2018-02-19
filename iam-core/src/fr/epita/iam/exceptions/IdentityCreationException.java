@@ -1,13 +1,15 @@
 
 package fr.epita.iam.exceptions;
 
+import java.io.Serializable;
+
 import fr.epita.iam.datamodel.Identity;
 
 
 @SuppressWarnings("serial")
-public class IdentityCreationException extends Exception {
+public class IdentityCreationException extends Exception implements Serializable {
 
-	Identity faultyIdentity;
+	private Identity faultyIdentity;
 
 	/**
 	 *

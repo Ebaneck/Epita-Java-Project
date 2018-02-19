@@ -13,11 +13,10 @@ public class SearchIdentity {
 		System.out.println("Current list of all Identities");
 		IdentityJDBCDAO identityJDBCDAO = new IdentityJDBCDAO();
 		List<Identity> identities = identityJDBCDAO.search();
-		//
-		//System.out.println("Please select the identity that you want to edit");
+		
 		for(Identity i : identities){
-			System.out.println("ID: "+i.getId()+ " \n"+i);  //searches and prints out all identities prior to editing
-			//print the .getId() / you are going to search the list of id's now.
+			System.out.println("ID: "+i.getId()+ " \n"+i);  
+			
 		}
 
 }

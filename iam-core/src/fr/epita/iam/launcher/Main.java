@@ -1,8 +1,6 @@
 
 package fr.epita.iam.launcher;
 
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -11,15 +9,21 @@ import fr.epita.iam.service.DeleteIdentity;
 import fr.epita.iam.service.IdentityJDBCDAO;
 import fr.epita.iam.service.SearchIdentity;
 import fr.epita.iam.service.UpdateIdentity;
+import fr.epita.logger.Logger;
 
 //the code.
 public class Main {
+	
+	private static final Logger LOGGER = new Logger(Main.class);
 
+
+	private static final String EXCEPTION = "EXCEPTION";
 	
 	public static void main(String[] args) throws SQLException {
 		
 
 		IdentityJDBCDAO jdbcdao = new IdentityJDBCDAO();
+		
 		 boolean quit = false;
 		 boolean isauthenticated = false;
 		 boolean userExist=false;
@@ -60,7 +64,7 @@ public class Main {
 		}
         catch (ClassNotFoundException e1) {
 			
-			e1.printStackTrace();
+        	LOGGER.error(EXCEPTION, e1); 
 		}
 	} while (!isauthenticated);
 		 
@@ -132,7 +136,8 @@ public class Main {
 
 				 
 			} catch (Exception e) {
-				 e.printStackTrace();
+				LOGGER.error(EXCEPTION, e); 
+				
 				
 			}
 

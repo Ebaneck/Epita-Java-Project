@@ -12,21 +12,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.logging.Level;
 
 import fr.epita.iam.datamodel.Identity;
-
 import fr.epita.iam.exceptions.IdentityCreationException;
-
 import fr.epita.logger.Logger;
 
 
 public class IdentityJDBCDAO implements IdentityDAO {
 
 	private static final Logger LOGGER = new Logger(IdentityJDBCDAO.class);
+	
+	private static final String EXCEPTION = "EXCEPTION"; //constants are caps
 
 	/**Inserts new record in Identity table as you pass new identity instance**/
 	@Override
@@ -43,7 +40,8 @@ public class IdentityJDBCDAO implements IdentityDAO {
 			preparedStatement.execute();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			LOGGER.error("error in create method :" + e.getMessage());
+			//LOGGER.error("error in create method :" + e.getMessage()); //nope
+			LOGGER.error(EXCEPTION, e); 
 			final IdentityCreationException businessException = new IdentityCreationException(identity, e);
 
 			throw businessException;
@@ -57,9 +55,9 @@ public class IdentityJDBCDAO implements IdentityDAO {
 					preparedStatement.close();
 				}
 			} catch (final SQLException e) {
-				System.out.println(e.getMessage());
+				//LOGGER.error(e.getMessage()); //should i still leave this??
 				
-				e.printStackTrace();
+				LOGGER.error(EXCEPTION, e);  //same, oui
 			}
 		}
 	}
@@ -92,16 +90,20 @@ public class IdentityJDBCDAO implements IdentityDAO {
 		} finally {
 			
 				try {
+					if (connection != null)
+						
 					connection.close();
+				
 				} catch (SQLException e1) {
-					
-					e1.printStackTrace();
+					LOGGER.error(EXCEPTION, e1); 
 				}
 				try {
+					if (preparedStatement != null)
 					preparedStatement.close();
 				} catch (SQLException e) {
 				
-					e.printStackTrace();
+					
+					LOGGER.error(EXCEPTION, e); 
 				}
 				
 				
@@ -149,7 +151,7 @@ public class IdentityJDBCDAO implements IdentityDAO {
 
 		    }
 		catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
+			LOGGER.error(EXCEPTION, e); 
         }
 		
 
@@ -181,7 +183,7 @@ public class IdentityJDBCDAO implements IdentityDAO {
             preparedStatement.executeUpdate();
 
         } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
+        	LOGGER.error(EXCEPTION, e); 
         }
         
         finally {
@@ -195,14 +197,14 @@ public class IdentityJDBCDAO implements IdentityDAO {
 	}
 
 	/**Returns specific record (single Identity object) from table depending on "id" you provide**/
-	public Identity locate(String identity_id) {
+	public Identity locate(String identityID) {
 		Identity identity = new Identity();
 		Connection connection = null;
 		 try {
 			 connection = getConnection();
 	            PreparedStatement preparedStatement = connection.
-	                    prepareStatement("select * from IDENTITIES where IDENTITY_ID = ?"); //change it to check IDENTITY_ID
-	            preparedStatement.setString(1, identity_id);
+	                    prepareStatement("select * from IDENTITIES where IDENTITY_ID = ?"); 
+	            preparedStatement.setString(1, identityID);
 	            
 	            ResultSet rs = preparedStatement.executeQuery();
 
@@ -213,12 +215,9 @@ public class IdentityJDBCDAO implements IdentityDAO {
 	                identity.setEmail(rs.getString("EMAIL"));
 	                
 	            }
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        } catch (ClassNotFoundException e) {
-				
-				e.printStackTrace();
-			}
+	        } catch (SQLException | ClassNotFoundException e) {
+	        	LOGGER.error(EXCEPTION, e); 
+	        } 
 		 
 
 	        return identity;
@@ -359,6 +358,7 @@ public class IdentityJDBCDAO implements IdentityDAO {
                     res.close();
                 
             } catch(SQLException ex) {
+            	LOGGER.error(EXCEPTION, ex); 
             }
         }
     }
@@ -386,13 +386,10 @@ public class IdentityJDBCDAO implements IdentityDAO {
 	            if (rs.next()) {
 	            	return true;
 	            } 
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	            System.out.println("No Data Found");  //data not exist
-	        } catch (ClassNotFoundException e) {
-				
-				e.printStackTrace();
-			}
+	        } catch (SQLException | ClassNotFoundException e) {
+	        	LOGGER.error(EXCEPTION, e); 
+	           
+	        } 
 		return false; //wrong.
 
 	       

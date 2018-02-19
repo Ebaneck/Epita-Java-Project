@@ -35,18 +35,18 @@ public class DeleteIdentity {
 		for(Identity i : identities){
 			System.out.println("Unique ID : "+i.getId()+ " \n"+i);
 		}
-		String identity_id = scanner.nextLine();
-		if (identity_id.isEmpty()) {
+		String identityID = scanner.nextLine();
+		if (identityID.isEmpty()) {
 			System.out.println("Did not understand you answer ");
 			return;
 		}
-		Identity foundIdentity = identityJDBCDAO.locate(identity_id);
+		Identity foundIdentity = identityJDBCDAO.locate(identityID);
 		if (foundIdentity == null){
-			System.out.println("Did not find identity: "+identity_id);
+			System.out.println("Did not find identity: "+identityID);
 		}
 		else{
 			System.out.println("Do you really want to "
-					+ "delete identity: " + identity_id+ " " + "Reply with: y/n");
+					+ "delete identity: " + identityID+ " " + "Reply with: y/n");
 			String answer = scanner.nextLine();
 			if (answer.equalsIgnoreCase("y")){
 				//persist the identity somewhere

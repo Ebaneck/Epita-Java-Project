@@ -1,11 +1,8 @@
 package fr.epita.iam.service;
 
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import fr.epita.iam.service.IdentityJDBCDAO;
 import fr.epita.iam.datamodel.Identity;
 import fr.epita.iam.exceptions.IdentityCreationException;
@@ -16,6 +13,8 @@ import fr.epita.iam.exceptions.IdentityCreationException;
  *
  */
 public class UpdateIdentity {
+	
+	private UpdateIdentity() {}
 	
 	
 	
@@ -33,16 +32,15 @@ public class UpdateIdentity {
 		List<Identity> identities = identityJDBCDAO.search();
 		System.out.println("Please select the identity that you want to edit");
 		for(Identity i : identities){
-			System.out.println("ID: "+i.getId()+ " \n"+i);  //searches and prints out all identities prior to editing
-			//print the .getId() / you are going to search the list of id's now.
+			System.out.println("ID: "+i.getId()+ " \n"+i);  
 		}
-		String identity_id = scanner.nextLine();
-		Identity foundIdentity = identityJDBCDAO.locate(identity_id);
+		String identityID = scanner.nextLine();
+		Identity foundIdentity = identityJDBCDAO.locate(identityID);
 		if (foundIdentity == null && !foundIdentity.equals("")){
-			System.out.println("Did not find identity "+identity_id);
+			System.out.println("Did not find identity "+identityID);
 		}
 		else{
-			System.out.println("Do you want to update identity: "+identity_id+" reply with y/n");
+			System.out.println("Do you want to update identity: "+identityID+" reply with y/n");
 			String answer = scanner.nextLine();
 			if (answer.equalsIgnoreCase("y")){
 				while(answer.equalsIgnoreCase("y")){

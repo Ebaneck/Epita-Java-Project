@@ -1,14 +1,12 @@
 package fr.epita.iam.service;
 
 
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 import fr.epita.iam.datamodel.Identity;
 import fr.epita.iam.exceptions.IdentityCreationException;
 import fr.epita.iam.service.IdentityJDBCDAO;
+import fr.epita.logger.Logger;
 
 
 /**
@@ -23,6 +21,9 @@ import fr.epita.iam.service.IdentityJDBCDAO;
 /**After running this, you will -> Insert a new record. Create a new identity instance**/
 public class CreateIdentity {
 	
+private static final Logger LOGGER = new Logger(CreateIdentity.class);
+	
+	private static final String EXCEPTION = "EXCEPTION";
 	private CreateIdentity() {}
 	
 	
@@ -51,7 +52,7 @@ public class CreateIdentity {
 			identityJDBCDAO.create(identity);
 		} catch (IdentityCreationException e) {
 			
-			e.printStackTrace();
+			LOGGER.error(EXCEPTION, e); 
 		}
 		System.out.println("Identity successfully created");
 		

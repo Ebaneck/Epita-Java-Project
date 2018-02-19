@@ -15,8 +15,6 @@ public interface IdentityDAO {
 
 	public void delete(Identity identity) throws IdentityCreationException;
 
-	//public List<Identity> search(Identity criteria);
-
 	public List<Identity> search();
 	
 	
