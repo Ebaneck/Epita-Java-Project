@@ -62,7 +62,11 @@ public class IdentityJDBCDAO implements IdentityDAO {
 		}
 	}
 
-	 /**Returns all records from table as a List of Identity objects**/
+	 /**
+	  * Searches the entire database for all identities
+	  * Returns all records from table as a List of Identity objects
+	  * 
+	  * **/
 	@Override
 	public List<Identity> search() {
 		final List<Identity> identities = new ArrayList<>();
@@ -365,8 +369,8 @@ public class IdentityJDBCDAO implements IdentityDAO {
     
     /**
      * 
-     * @param username 
-     * @param adminUsername
+     * 
+     * @param adminUser
      * 
      * verify if an admin user exist already within the database
      * 

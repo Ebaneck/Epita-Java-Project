@@ -1,12 +1,12 @@
 package fr.epita.iam.datamodel;
 
-public class Authenticate {
+public class Admin {
 	
 	
 	private String user; 
 	private String password;
 	
-	public Authenticate() {
+	public Admin() {
 		
 	}
 	
@@ -15,7 +15,7 @@ public class Authenticate {
 	 * @param password
 	 *
 	 */
-	public Authenticate(String user, String password) {
+	public Admin(String user, String password) {
 		this.password = password;
 		this.user = user;
 		
@@ -77,7 +77,7 @@ public class Authenticate {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Authenticate other = (Authenticate) obj;
+		Admin other = (Admin) obj;
 		if (password == null) {
 			if (other.password != null)
 				return false;

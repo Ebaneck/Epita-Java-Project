@@ -18,7 +18,7 @@ import fr.epita.logger.Logger;
  *
  */
 
-/**After running this, you will -> Insert a new record. Create a new identity instance**/
+/** Create a new identity instance**/
 public class CreateIdentity {
 	
 private static final Logger LOGGER = new Logger(CreateIdentity.class);
@@ -29,8 +29,10 @@ private static final Logger LOGGER = new Logger(CreateIdentity.class);
 	
 	
 	/**
+	 * 
+	 * @param create: Used to collect user input
+	 * 
 	 * This method creates an Identity from user inputs
-	 * @param scanner: Used to collect user input
 	 */
 	public static void makeIdentity(Scanner create){
 		System.out.println("Identity Creation takes place here:");

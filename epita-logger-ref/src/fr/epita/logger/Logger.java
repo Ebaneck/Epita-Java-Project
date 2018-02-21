@@ -1,6 +1,4 @@
-/**
- * Ce fichier est la propriété de Thomas BROUSSARD Code application : Composant :
- */
+
 package fr.epita.logger;
 
 import java.io.FileNotFoundException;
@@ -11,23 +9,13 @@ import java.util.Date;
 /**
  * <h3>Description</h3>
  * <p>
- * This class allows to ...
+ * This class allows the creation of Business custom exceptions
  * </p>
  *
  * <h3>Usage</h3>
  * <p>
- * This class should be used as follows:
+ * This class should be used as follows: by calling Logger in your class
  *
- * <pre>
- * <code>${type_name} instance = new ${type_name}();</code>
- * </pre>
- * </p>
- *
- * @since $${version}
- * @see See also $${link}
- * @author ${user}
- *
- *         ${tags}
  */
 public class Logger {
 
@@ -64,27 +52,7 @@ public class Logger {
 		printMessage(message, "DEBUG");
 	}
 
-	/**
-	 * <h3>Description</h3>
-	 * <p>This methods allows to ...</p>
-	 *
-	 * <h3>Usage</h3>
-	 * <p>It should be used as follows :
-	 *
-	 * <pre><code> ${enclosing_type} sample;
-	 *
-	 * //...
-	 *
-	 * sample.${enclosing_method}();
-	 *</code></pre>
-	 * </p>
-	 *
-	 * @since $${version}
-	 * @see Voir aussi $${link}
-	 * @author ${user}
-	 *
-	 * ${tags}
-	 */
+
 	private void printMessage(String message, String level) {
 		final Date date = new Date();
 		final String timestamp = new SimpleDateFormat("yyyyMMdd_HH:mm:ss.SSS").format(date);

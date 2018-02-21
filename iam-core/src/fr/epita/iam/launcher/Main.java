@@ -75,11 +75,11 @@ public class Main {
 					System.out.println("Access Granted! Welcome To!");
 
 					Scanner scanner = new Scanner(System.in);
-					//prompt the user to select an option  which can be create, update, delete, modify or exit
+					
 					
 					do {
 					
-					// Display Identity manager menu in a nice way
+					
 			        System.out.println("*****************************************");
 			        System.out.println("|   IDENTITY MANAGER APPLICATION          |");
 			        System.out.println("*****************************************");
