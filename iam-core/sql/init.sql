@@ -9,8 +9,8 @@ CREATE TABLE IDENTITIES
     );
     
     CREATE TABLE USERS (
-    userid INT NOT NULL GENERATED ALWAYS AS IDENTITY, /*ok, this is not required*/
-    username VARCHAR(32) NOT NULL, /*this needs to be differnt/unique// alter table and set the settings fr this coloumn*/
+    userid INT NOT NULL GENERATED ALWAYS AS IDENTITY, //ok, this is not required
+    username VARCHAR(32) NOT NULL, //this needs to be differnt/unique// alter table and set the settings fr this coloumn
     pass_salt VARCHAR(255) NOT NULL,
             -- a string of 16 random bytes
     pass_md5 VARCHAR(255) NOT NULL
