@@ -37,7 +37,7 @@ public class UpdateIdentity {
 		}
 		String identityID = scanner.nextLine();
 		Identity foundIdentity = identityJDBCDAO.locate(identityID);
-		if (foundIdentity == null && !foundIdentity.equals("")){
+		if (foundIdentity == null || !foundIdentity.equals("")){
 			System.out.println("Did not find identity "+identityID);
 		}
 		else{
@@ -85,12 +85,13 @@ public class UpdateIdentity {
 			else{
 				System.out.println("Update cancel");
 			}
+			
+			//persist the identity somewhere
+			System.out.println("This is the identity you have updated: \n"+foundIdentity);
+			identityJDBCDAO.update(foundIdentity);
+			System.out.println("update completed successfully");
+			
 		}
-		
-		//persist the identity somewhere
-		System.out.println("This is the identity you have updated: \n"+foundIdentity);
-		identityJDBCDAO.update(foundIdentity);
-		System.out.println("update completed successfully");
 		
 	}
 	
