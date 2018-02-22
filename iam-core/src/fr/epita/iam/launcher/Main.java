@@ -29,6 +29,7 @@ public class Main {
 		 boolean userExist=false;
 		 
 		 System.out.print("This is the beginning of Iam Core Program....." + "\n");
+		 System.out.print("If the admin user name does not exist, we will create it for you" + "\n");
 		 do { 
 			 
 			if(userExist && !isauthenticated) {

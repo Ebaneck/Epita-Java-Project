@@ -26,7 +26,6 @@ public class UpdateIdentity {
 	
 	
 
-	@SuppressWarnings("null")
 	public static void update(Scanner scanner) throws IdentityCreationException{
 		System.out.println("Identity Update");
 		IdentityJDBCDAO identityJDBCDAO = new IdentityJDBCDAO();
@@ -37,7 +36,7 @@ public class UpdateIdentity {
 		}
 		String identityID = scanner.nextLine();
 		Identity foundIdentity = identityJDBCDAO.locate(identityID);
-		if (foundIdentity == null || !foundIdentity.equals("")){
+		if (foundIdentity == null && !foundIdentity.equals("")){
 			System.out.println("Did not find identity "+identityID);
 		}
 		else{
