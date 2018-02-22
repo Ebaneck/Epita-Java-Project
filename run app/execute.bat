@@ -5,9 +5,11 @@ cd "C:\Users\ceban\Desktop\Claude\db-derby-10.14.1.0-bin\db-derby-10.14.1.0-bin\
 start cmd /k call startNetworkServer.bat
 
 
-cd "C:\Users\ceban\Desktop\Claude\db-derby-10.14.1.0-bin\db-derby-10.14.1.0-bin\bin"
+        ::change directory to derby bin dir to launch ij.bat for database import
 
-start cmd /k call ij.bat  
+::cd "C:\Users\ceban\Desktop\Claude\db-derby-10.14.1.0-bin\db-derby-10.14.1.0-bin\bin"
+
+:: start cmd /k call ij.bat  
   
   
    ::Create the database and open a connection to the database using 
