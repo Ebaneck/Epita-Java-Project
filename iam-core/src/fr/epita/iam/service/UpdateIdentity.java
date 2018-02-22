@@ -26,6 +26,7 @@ public class UpdateIdentity {
 	
 	
 
+	@SuppressWarnings("null")
 	public static void update(Scanner scanner) throws IdentityCreationException{
 		System.out.println("Identity Update");
 		IdentityJDBCDAO identityJDBCDAO = new IdentityJDBCDAO();
