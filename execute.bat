@@ -1,8 +1,11 @@
 @echo OFF
 
-cd "C:\Users\ceban\Desktop\Claude\db-derby-10.14.1.0-bin\db-derby-10.14.1.0-bin\bin"
 
-start cmd /k call startNetworkServer.bat
+start "" "%~dp0db-derby-10.14.1.0-bin\bin\startNetworkServer.bat"
+
+::cd "C:\Users\ceban\Desktop\Claude\db-derby-10.14.1.0-bin\db-derby-10.14.1.0-bin\bin"
+
+::start cmd /k call startNetworkServer.bat
 
 
         ::change directory to derby bin dir to launch ij.bat for database import
@@ -23,7 +26,8 @@ start cmd /k call startNetworkServer.bat
 :: run 'init.sql'
 
 
-cd "C:\Users\ceban\Desktop\Claude\2017s2_fundamental_b\Epita Java Project\run app\"
+cd /d "%~dp0run app"
+::cd "C:\Users\ceban\Desktop\Claude\2017s2_fundamental_b\Epita Java Project\run app\"
 java -jar  -Dconf=testConfiguration.properties iamcore.jar
 
 
