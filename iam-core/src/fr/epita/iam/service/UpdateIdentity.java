@@ -37,8 +37,7 @@ public class UpdateIdentity {
 		}
 		String identityID = scanner.nextLine();
 		Identity foundIdentity = identityJDBCDAO.locate(identityID);
-		//if (foundIdentity == null && !foundIdentity.equals("")){
-			if (foundIdentity != null){
+		if (foundIdentity != null){
 			System.out.println("Did not find identity "+identityID);
 		}
 		else{
