@@ -1,0 +1,23 @@
+20180222_11:25:59.425 - ERROR - EXCEPTION
+java.sql.SQLNonTransientConnectionException: DERBY SQL error: ERRORCODE: 40000, SQLSTATE: XJ041, SQLERRMC: Failed to create database 'iam-core', see the next exception for details.::SQLSTATE: XBM0J
+	at org.apache.derby.client.am.SQLExceptionFactory.getSQLException(Unknown Source)
+	at org.apache.derby.client.am.SqlException.getSQLException(Unknown Source)
+	at org.apache.derby.jdbc.ClientDriver.connect(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at fr.epita.iam.service.IdentityJDBCDAO.getConnection(IdentityJDBCDAO.java:128)
+	at fr.epita.iam.service.IdentityJDBCDAO.userexist(IdentityJDBCDAO.java:384)
+	at fr.epita.iam.launcher.Main.main(Main.java:50)
+Caused by: ERROR XJ041: DERBY SQL error: ERRORCODE: 40000, SQLSTATE: XJ041, SQLERRMC: Failed to create database 'iam-core', see the next exception for details.::SQLSTATE: XBM0J
+	at org.apache.derby.client.am.ClientConnection.completeSqlca(Unknown Source)
+	at org.apache.derby.client.net.NetConnectionReply.parseRdbAccessFailed(Unknown Source)
+	at org.apache.derby.client.net.NetConnectionReply.parseAccessRdbError(Unknown Source)
+	at org.apache.derby.client.net.NetConnectionReply.parseACCRDBreply(Unknown Source)
+	at org.apache.derby.client.net.NetConnectionReply.readAccessDatabase(Unknown Source)
+	at org.apache.derby.client.net.NetConnection.readSecurityCheckAndAccessRdb(Unknown Source)
+	at org.apache.derby.client.net.NetConnection.flowSecurityCheckAndAccessRdb(Unknown Source)
+	at org.apache.derby.client.net.NetConnection.flowUSRIDPWDconnect(Unknown Source)
+	at org.apache.derby.client.net.NetConnection.flowConnect(Unknown Source)
+	at org.apache.derby.client.net.NetConnection.<init>(Unknown Source)
+	at org.apache.derby.client.net.ClientJDBCObjectFactoryImpl.newNetConnection(Unknown Source)
+	... 6 more

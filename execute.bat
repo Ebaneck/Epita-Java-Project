@@ -1,7 +1,9 @@
 @echo OFF
 
 
-start "" "%~dp0db-derby-10.14.1.0-bin\bin\startNetworkServer.bat"
+cd /d "%~dp0db-derby-10.14.1.0-bin\bin\"
+
+start cmd /k call startNetworkServer.bat
 
 ::cd "C:\Users\ceban\Desktop\Claude\db-derby-10.14.1.0-bin\db-derby-10.14.1.0-bin\bin"
 

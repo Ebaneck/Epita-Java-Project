@@ -1,14 +1,14 @@
-Wed Feb 21 15:23:26 CET 2018 : Apache Derby Network Server - 10.14.1.0 - (1808820) started and ready to accept connections on port 1527
+Thu Feb 22 11:30:17 CET 2018 : Apache Derby Network Server - 10.14.1.0 - (1808820) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Wed Feb 21 15:24:08 CET 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.1.0 - (1808820): instance a816c00e-0161-b8bf-6549-00007d377891 
-on database directory C:\Users\ceban\Desktop\Claude\db-derby-10.14.1.0-bin\db-derby-10.14.1.0-bin\bin\iam-core with class loader sun.misc.Launcher$AppClassLoader@610455d6 
-Loaded from file:/C:/Users/ceban/Desktop/Claude/db-derby-10.14.1.0-bin/db-derby-10.14.1.0-bin/lib/derby.jar
+Thu Feb 22 11:30:31 CET 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.1.0 - (1808820): instance a816c00e-0161-bd10-4c0b-ffffa2be43da 
+on database directory C:\Users\ceban\Desktop\Claude\2017s2_fundamental_b\Epita Java Project\db-derby-10.14.1.0-bin\bin\iam-core with class loader sun.misc.Launcher$AppClassLoader@610455d6 
+Loaded from file:/C:/Users/ceban/Desktop/Claude/2017s2_fundamental_b/Epita%20Java%20Project/db-derby-10.14.1.0-bin/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_151-b12
-user.dir=C:\Users\ceban\Desktop\Claude\db-derby-10.14.1.0-bin\db-derby-10.14.1.0-bin\bin
+user.dir=C:\Users\ceban\Desktop\Claude\2017s2_fundamental_b\Epita Java Project\db-derby-10.14.1.0-bin\bin
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0
-derby.system.home=C:\Users\ceban\Desktop\Claude\db-derby-10.14.1.0-bin\db-derby-10.14.1.0-bin\bin
+derby.system.home=C:\Users\ceban\Desktop\Claude\2017s2_fundamental_b\Epita Java Project\db-derby-10.14.1.0-bin\bin
 Database Class Loader started - derby.database.classpath=''
